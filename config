@@ -19,8 +19,9 @@ set $W5  5:
 set $W6  6:
 set $W7  7:
 set $W8  8:
-set $W9  9:
+set $W9  9:
 set $W0 10:
+set $W11 11:
 
 #workspace names
 workspace "1:" output VGA-1
@@ -31,8 +32,9 @@ workspace "5:" output VGA-1
 workspace "6:" output DVI-D-1
 workspace "7:" output VGA-1
 workspace "8:" output VGA-1
-workspace "9:" output VGA-1
+workspace "9:" output VGA-1
 workspace "10:" output VGA-1
+workspace "11:" output VGA-1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -64,7 +66,8 @@ bindsym $mod+Return exec xfce4-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec rofi -show run
+bindsym $mod+Shift+w exec rofi -show window
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -142,6 +145,7 @@ bindsym $mod+7 workspace $W7
 bindsym $mod+8 workspace $W8
 bindsym $mod+9 workspace $W9
 bindsym $mod+0 workspace $W0
+bindsym $mod+Control+1 workspace $W11
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $W1
@@ -190,11 +194,11 @@ bindsym $mod+r mode "resize"
 
 # Startups #
 exec --no-startup-id fcitx
-#exec --no-startup-id volumeicon
+exec --no-startup-id rescuetime
 exec --no-startup-id sogou-autostart
 #exec --no-startup-id nm-applet
 exec --no-startup-id xautolock -locker lock -time 10 -corners 0-00
-exec --no-startup-id feh --bg-fill ~/pic/mountain.jpg
+exec --no-startup-id feh --bg-fill ~/pic/road.jpg
 exec --no-startup-id xset dpms 0 0 1800
 exec --no-startup-id redshift -c ~/.config/redshift.conf
 exec --no-startup-id ~/.screenlayout/arandr.sh
@@ -237,18 +241,21 @@ assign [class="(?i)fqterm"] → $W0
 assign [class="(?i)virtualbox"] → $W7
 assign [class="(?i)thunar"] → $W4
 assign [class="(?i)phpstorm"] → $W2
+assign [class="(?i)datagrip"] → $W9
 
 # Open specific applications in floating mode
 for_window [class="Lxappearance"] floating enable sticky enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
+for_window [class="leafpad"] floating enable sticky enable border normal
 
 
 #应用程序快捷键
-set $mode_app App (f) FQterm,(c) Chromium,(p) PhpStorm,(t) Thunar,(v) VirtualBox
+set $mode_app App (f) FQterm,(c) Chromium,(p) PhpStorm,(t) Thunar,(d) DataGrip
 mode "$mode_app"{
     bindsym f exec fqterm,mode "default"
     bindsym c exec chromium,mode "default"
     bindsym p exec phpstorm,mode "default"
+    bindsym d exec datagrip,mode "default"
     bindsym t exec thunar,mode "default"
     bindsym v exec virtualbox,mode "default"
     bindsym g exec goldendict,mode "default"
