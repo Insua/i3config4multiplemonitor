@@ -269,10 +269,11 @@ mode "$mode_app"{
 bindsym $mod+x mode "$mode_app"
 
 #关机，重启和锁屏
-set $mode_system System (l) lock,(Shift+l) lock&black,(r) reboot,(s) shutdown
+set $mode_system System (l) lock,(Shift+l) lock&black,(Shift+s) suspend,(r) reboot,(s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id lock, mode "default"
     bindsym Shift+l exec --no-startup-id lock&&xset dpms force off, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym s exec --no-startup-id systemctl poweroff,mode "default"
     #back to normal: Enter or Escape
